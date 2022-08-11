@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // Welcome menu function [function definition]
+    let welcomeMenu = function (welcome) {
+      // if welcome choice is 1, proceed to display bank menu
+      switch (welcome) {
+        case 1:
+          let choice = Number(
+            prompt(
+              `Eazybanking\n1>Transfers\n2>Airtime\n3>Data\n4>Check Balance\n5>Exit`
+            )
+          );
+          // depending on the choice, call the appropriate function(Transfer, Airtime, Data, Check Balance, Exit)
+          mainMenu(choice);
+          break;
+
+        // if user does not want to continue:
+        case 2:
+          alert('You have cancelled your selection');
+          break;
+
+        // Default for invalid input
+        default:
+          alert('Invalid choice');
+          break;
+      }
+    }
+
+    // Main menu function [Arrow function]
+    let mainMenu = (choice) => {
+      let totalBalance = 1000000;
+      switch (choice) {
+        case 1:
+          let transferPrompt = Number(
+            prompt(
+              '1>Send to Account Number\n2>Pay with PhoneNumber\n3>Send to Merchant ID\n4>Back'
+            )
+          );
+          // if user wants to send to account number or phone number or merchant ID call the respective function
+          accountTransfer(transferPrompt);
+          break;
+
+        // if user wants to buy airtime
+        case 2:
+          let airtimePrompt = Number(
+            prompt('1>Buy Airtime-self\n2>Buy Airtime-others\n3>Back')
+          );
+          // if user wants to buy airtime-self or airtime-others call the respective function
+          airtimePurchase(airtimePrompt);
+          break;
+
+        // if user wants to buy data
+        case 3:
+          let dataPrompt = Number(
+            prompt(
+              'eaZybanking\nSelect purchase type\n1>self\n2>Third-party\n3>Back'
+            )
+          );
+          dataPurchase(dataPrompt);
+          break;
+
+        //if user wants to check account balance
+        case 4:
+          alert('Your balance is: N' + totalBalance);
+          break;
+
+        // if user wants to exit
+        case 5:
+          alert('You have successfully exited');
+          break;
+
+        // Default for invalid choice
+        default:
+          alert('Invalid choice');
+          break;
+      }
+    }
+
+    // Transfer menu function
+    function accountTransfer(transferPrompt) {
+      switch (transferPrompt) {
+        //send to account number
+        case 1: {
+          let accountNumber = prompt('Enter Destination Account Number');
+          let amount = prompt('Enter Amount');
+          //Select bank to transfer to(recepient's bank)
+          switch (Number(
+            prompt(
+              'Select Destination Bank:\n1>Zenith Bank\n2>Keystone Bank\n3>Fidelity Bank'
+            )
+          )) {
+            //if destination bank is Zenith
+            case 1: {
+              let pin = prompt(
+                'You are about to send\nAmount: N' +
+                amount +
+                '\nRecepient: John Smith\nBank: Zenith Bank\n\nEnter PIN to confirm:'
+              );
+              //pin is 1234 - condition if user is correct
+              if (pin == '1234') {
+                alert('You have successfully sent N' + amount + ' to John Smith');
+              } else {
+                //user entered pin is incorrect - alert user
+                alert('Incorrect pin');
+              }
+              break;
+            }
+
+            //if destination bank is Keystone
+            case 2: {
+              //bind user entered pin to variable
+              let pin = prompt(
+                'You are about to send\nAmount: N' +
+                amount +
+                '\nRecepient: Tony Tetulla\nBank: Keystone Bank\n\nEnter PIN to confirm:'
+              );
+              if (pin == '1234') {
+                alert(
+                  'You have successfully sent N' + amount + ' to Tony Tetulla'
+                );
+              } else {
+                alert('Incorrect pin');
+              }
+              break;
+            }
+
+            //if destination bank is Fidelity
+            case 3: {
+              let pin = prompt(
+                'You are about to send\nAmount: N' +
+                amount +
+                '\nRecepient: Austin Banks\nBank: Fidelity Bank\n\nEnter PIN to confirm:'
+              );
+              if (pin == '1234') {
+                alert(
+                  'You have successfully sent N' + amount + ' to Austin Banks'
+                );
+              } else {
+                alert('Incorrect pin');
+              }
+              break;
+            }
+            default:
+              alert('Invalid Bank');
+          }
+          break;
+        }
+
+        //pay with phone number
+        case 2: {
+          let phoneNumber = prompt("Enter Recepient's Phone Number");
+          let amount = prompt('Enter Amount');
+          switch (prompt(
+            'Pay with Phone Number: ' +
+            phoneNumber +
+            ' Amount: ' +
+            amount +
+            '\n\nEnter PIN to confirm:'
+          )) {
+            case ('1234'):
+              alert(
+                'You have successfully sent N' + amount + ' to ' + phoneNumber
+              );
+              break;
+
+            default:
+              alert('Incorrect pin');
+              break;
+          }
+          break;
+        }
+
+        //send to merchant ID
+        case 3: {
+          let merchantID = prompt('Enter Merchant ID');
+          let amount = prompt('Enter Amount');
+          switch (prompt(
+            'Transfer to Merchant ID: ' +
+            merchantID +
+            ' Amount: ' +
+            amount +
+            '\n\nEnter PIN to confirm:'
+          )) {
+            case ('1234'):
+              alert(
+                'You have successfully sent N' + amount + ' to ' + merchantID
+              );
+              break;
+
+            default:
+              alert('Incorrect pin');
+              break;
+          }
+          break;
+        }
+
+        //if user wants to go back to welcome menu first selection - main menu[transfers, airtime, data, etc.]
+        case 4:
+          welcomeMenu(1);
+          break;
+
+        //Default for invalid choice
+        default:
+          alert('Invalid choice, Please choose again');
+          //call the main menu function (transfer menu) again
+          mainMenu(1);
+          break;
+      }
+    }
+
+    // Airtime purchase menu function
+    function airtimePurchase(airtimePrompt) {
+      switch (airtimePrompt) {
+        //if buying airtime for self
+        case 1: {
+          let amount = prompt('Enter Amount');
+          let pin = prompt(
+            'You are about to purchase\nAmount: N' +
+            amount +
+            '\nRecepient: Self(2348132284088)\n\nEnter PIN to confirm:'
+          );
+          if (pin == '1234') {
+            alert(
+              'You have successfully purchased N' +
+              amount +
+              ' of airtime for yourself'
+            );
+          } else {
+            alert('Incorrect pin');
+          }
+          break;
+        }
+
+        //if buying airtime for others
+        case 2: {
+          let phoneNumber = prompt("Enter Recepient's Phone Number");
+          let amount = prompt('Enter Amount');
+          let pin = prompt(
+            'You are about to purchase\nAmount: N' +
+            amount +
+            '\nRecepient: ' +
+            phoneNumber +
+            '\n\nEnter PIN to confirm:'
+          );
+          if (pin == '1234') {
+            alert(
+              'You have successfully purchased N' +
+              amount +
+              ' of airtime for ' +
+              phoneNumber
+            );
+          } else {
+            alert('Incorrect pin');
+          }
+          break;
+        }
+
+        //if user wants to go back to welcome menu first selection - main menu[transfers, airtime, data, etc.]
+        case 3:
+          welcomeMenu(1);
+          break;
+
+        //Default for invalid choice
+        default:
+          alert('Invalid choice, Please choose again');
+          mainMenu(2);
+          break;
+      }
+    }
+
+    // Data purchase menu function
+    function dataPurchase(dataPrompt) {
+      switch (dataPrompt) {
+        // if purchasing data for self
+        case 1:
+          // data plan selection
+          switch (Number(
+            prompt(
+              '1>75MB - N100\n2>200MB - N200\n3>350MB - N300\n4>1.5GB - N1,000\n5>Back'
+            )
+          )) {
+            // dataplan for 75MB
+            case 1: {
+              let pin = prompt(
+                'eaZyBanking\nYou are about to purchase [75 MB 1-Day Plan for 1 DAY]\n\nEnter PIN to confirm:'
+              );
+              if (pin == '1234') {
+                alert('You have successfully purchased 75MB of data');
+              } else {
+                alert('Incorrect pin');
+              }
+              break;
+            }
+
+            // dataplan for 200MB
+            case 2: {
+              let pin = prompt(
+                'eaZyBanking\nYou are about to purchase [200 MB 2-Day Plan for 2 DAYS]\n\nEnter PIN to confirm:'
+              );
+              if (pin == '1234') {
+                alert('You have successfully purchased 200MB of data');
+              } else {
+                alert('Incorrect pin');
+              }
+              break;
+            }
+
+            // data plan for 350MB
+            case 3: {
+              let pin = prompt(
+                'eaZyBanking\nYou are about to purchase [350 MB 3-Day Plan for 3 DAYS]\n\nEnter PIN to confirm:'
+              );
+              if (pin == '1234') {
+                alert('You have successfully purchased 350MB of data');
+              } else {
+                alert('Incorrect pin');
+              }
+              break;
+            }
+
+            // data plan for 1.5GB
+            case 4: {
+              let pin = prompt(
+                'eaZyBanking\nYou are about to purchase [1.5GB 1-week Plan for 7 DAYS]\n\nEnter PIN to confirm:'
+              );
+              if (pin == '1234') {
+                alert('You have successfully purchased 1.5GB of data');
+              } else {
+                alert('Incorrect pin');
+              }
+              break;
+            }
+
+            // Back to data menu (data for self or others)
+            case 5:
+              mainMenu(3);
+              break;
+
+            // Default for invalid choice, alert and ask again
+            default:
+              alert('Invalid choice, Please choose again');
+              dataPurchase(dataPrompt);
+              break;
+          }
+          break;
+
+        //if purchasing data for others
+        case 2:
+          let phoneNumber = prompt("Enter Recepient's Phone Number");
+          // if phone number is empty
+          if (phoneNumber == '') {
+            alert('Invalid number');
+            dataPurchase(2);
+          }
+          // if phone number is provided
+          else {
+            switch (Number(
+              prompt(
+                '1>75MB - N100\n2>200MB - N200\n3>350MB - N300\n4>1.5GB - N1,000\n5>Back'
+              )
+            )) {
+              // dataplan for 75MB for others
+              case 1: {
+                let pin = prompt(
+                  'eaZyBanking\nYou are about to purchase [75 MB 1-Day Plan for 1 DAY] for ' +
+                  phoneNumber +
+                  '\n\nEnter PIN to confirm:'
+                );
+                if (pin == '1234') {
+                  alert(
+                    'You have successfully purchased 75MB of data for ' +
+                    phoneNumber
+                  );
+                } else {
+                  alert('Incorrect pin');
+                }
+                break;
+              }
+
+              // dataplan for 200MB for others
+              case 2: {
+                let pin = prompt(
+                  'eaZyBanking\nYou are about to purchase [200 MB 2-Day Plan for 2 DAYS] for ' +
+                  phoneNumber +
+                  '\n\nEnter PIN to confirm:'
+                );
+                if (pin == '1234') {
+                  alert(
+                    'You have successfully purchased 200MB of data for ' +
+                    phoneNumber
+                  );
+                } else {
+                  alert('Incorrect pin');
+                }
+                break;
+              }
+
+              // data plan for 350MB for others
+              case 3: {
+                let pin = prompt(
+                  'eaZyBanking\nYou are about to purchase [350 MB 3-Day Plan for 3 DAYS] for ' +
+                  phoneNumber +
+                  '\n\nEnter PIN to confirm:'
+                );
+                if (pin == '1234') {
+                  alert(
+                    'You have successfully purchased 350MB of data for ' +
+                    phoneNumber
+                  );
+                } else {
+                  alert('Incorrect pin');
+                }
+                break;
+              }
+
+              // data plan for 1.5GB for others
+              case 4: {
+                let pin = prompt(
+                  'eaZyBanking\nYou are about to purchase [1.5GB 1-week Plan for 7 DAYS] for ' +
+                  phoneNumber +
+                  '\n\nEnter PIN to confirm:'
+                );
+                if (pin == '1234') {
+                  alert(
+                    'You have successfully purchased 1.5GB of data for ' +
+                    phoneNumber
+                  );
+                } else {
+                  alert('Incorrect pin');
+                }
+                break;
+              }
+
+              // Back to data menu (data for self or others)
+              case 5: {
+                mainMenu(3);
+                break;
+              }
+
+              // Default for invalid choice, alert and ask again
+              default: {
+                alert('Invalid choice, Please choose again');
+                dataPurchase(dataPrompt);
+                break;
+              }
+            }
+          }
+          break;
+
+        // if going back to welcome menu
+        case 3:
+          welcomeMenu(1);
+          break;
+
+        // if choice not among suggested, alert and ask again
+        default:
+          alert('Invalid choice, Please choose again');
+          mainMenu(3);
+          break;
+      }
+    }
+
+    // Collect ussd input from user [Beginning]
+    switch (prompt('Enter your Zenith Bank USSD code')) {
+      //if user enters *966#
+      case ('*966#'):
+        /* if valid ussd provided, collect input from user on choice and convert to number */
+
+        //Welcome page, 1 to proceed, 2 to cancel
+        let welcome = Number(
+          prompt(
+            'Welcome to USSD Banking. Please note a N6.98 network charge will be applied to your account for banking services on this channel.\n1. Accept\n2. Cancel'
+          )
+        );
+
+        // Call welcomeMenu function to display menu and pass welcome variable
+        welcomeMenu(welcome);
+        break;
+
+      // if ussd is invalid or empty, alert and ask again
+      default:
+        alert('Invalid USSD code for Zenith Bank');
+        break;
+    }
+  </script>
+</body>
+
+</html>

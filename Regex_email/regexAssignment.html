@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function validateMail(){
+        let email = prompt("Enter your email");
+        
+        if (/^[a-z][\w\.-]+[^_\.@-]@[a-z][a-z-]{1,}\.[a-z]{1,}[a-z\.]{0,1}[^\W_]+$/gim.test(email)) {
+            //console.log(email);
+            alert(`Email is: ${email.replace(/.(?=.*@)/g, "*")}`);
+        }
+        else if(email == ""){
+            return
+        }
+        else{
+            alert("Invalid email : " + email +'\nTry Again');
+            validateMail();
+        }
+    }
+
+    validateMail();
+
+    //Lesson
+                //?= is a positive lookahead (asserts that the regex matches)
+            //lookahead syntax: X(?=.*Y) - matches X only if it is followed by Y
+            //.(?=.*@) - matches all characters before @ (.* - zero or more of any character)
+            //(/^[^@]*/g, "*") --->> replaces the first part of the email with *
+            //(com|net|org)$ - matches the last part of the email (com|net|org)
+            // /@/.test(email) && /[^@]{2,}\.(.{2,})$/.test(email) --> test for @ and words separated by .
+    </script>
+</body>
+</html>

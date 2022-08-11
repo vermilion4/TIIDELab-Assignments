@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chessboard</title>
+</head>
+
+<body>
+
+    <script>
+        /* A program that creates a string that represents an 8x8 grid, using newline characters to separate lines. At each position of the grid there is either a space or a “#” character. The characters should form a chessboard. */
+
+        //chessboard function with size parameter as binding
+        let chessboard = (size) => {
+            //create a string variable to store the chessboard
+            let board = "";
+            //loop through the width of the chessboard
+            for (let i = 0; i < size; i++) {
+                //loop through the height of the chessboard
+                for (let j = 0; j < size; j++) {
+                    //if the width + height is even, add a space
+                    if ((i + j) % 2 == 0) {
+                        board += " ";
+                    }
+                    //if the width + height is odd, add a #
+                    else {
+                        board += "#";
+                    }
+                }
+                //add a newline character to the end of each row[each complete cycle of the inner loop]
+                board += "\n";
+            }
+            //return the chessboard
+            return board;
+        }
+
+        //call the chessboard function with the parameter of 8 for 8x8 chessboard[chessboard(n) for nxn chessboard, where size = n]
+        console.log(chessboard(8));
+    </script>
+</body>
+
+</html>
